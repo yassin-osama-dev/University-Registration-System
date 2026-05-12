@@ -30,4 +30,9 @@ public abstract class Person {
     }
 
     public abstract void displayProfile();
+
+    @Override
+    public String toString() {
+        return  getID() + "," + getName() + "," + getEmail();
+    }
 }

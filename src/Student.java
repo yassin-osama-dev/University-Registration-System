@@ -39,4 +39,9 @@ public class Student extends Person {
         System.out.println("Major: "+ major);
         System.out.println("gpa: "+ gpa);
     }
+    @Override
+    public String toString() {
+        return super.toString()+","+getMajor()+","+getGpa();
+    }
+
 }
