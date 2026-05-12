@@ -9,7 +9,7 @@ class RegistrationSystem {
     ArrayList<Courses> courses = new ArrayList<>();
     java.io.File student_file = new java.io.File("student.txt");
     java.io.File proff_file = new java.io.File("proff.txt");
-    java.io.File course_file = new java.io.File("course.txt");
+    java.io.File course_file = new java.io.File("Courses.txt");
     Scanner scanner=new Scanner(course_file);
 
     RegistrationSystem() throws FileNotFoundException {

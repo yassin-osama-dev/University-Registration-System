@@ -1,74 +1,65 @@
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        // Create registration system
-        RegistrationSystem rs = new RegistrationSystem();
+        try {
 
-        // Create student
-        Student s1 = new Student(
-                "Yassin",
-                "2025001",
-                "yassin@gmail.com",
-                "Computer Science",
-                3.7
-        );
+            // Create registration system
+            RegistrationSystem system = new RegistrationSystem();
 
-        // Add courses to student
-        List<String> courses = new LinkedList<>();
+            // Create students
+            Student s1 = new Student(
+                    "Yassin Osama",
+                    "2025001",
+                    "yassin@gmail.com",
+                    "Computer Science",
+                    3.7
+            );
 
-        courses.add("OOP");
-        courses.add("Data Structures");
-        courses.add("Database");
+            Student s2 = new Student(
+                    "Ahmed Ali",
+                    "2025002",
+                    "ahmed@gmail.com",
+                    "Software Engineering",
+                    3.4
+            );
 
-        s1.setCourse(courses);
+            // Add students to file
+            system.Add_Student(s1);
+            system.Add_Student(s2);
 
-        // Create professor
-        Professor p1 = new Professor(
-                "Ahmed Ali",
-                "P100",
-                "ahmed@university.com",
-                "Computer Science"
-        );
+            System.out.println("Students added successfully!");
+            System.out.println();
 
-        // Display profiles
-        System.out.println("===== STUDENT PROFILE =====");
-        s1.displayProfile();
+            // Display student profiles
+            System.out.println("=== STUDENT 1 ===");
+            s1.displayProfile();
 
-        System.out.println();
+            System.out.println();
 
-        System.out.println("===== PROFESSOR PROFILE =====");
-        p1.displayProfile();
+            System.out.println("=== STUDENT 2 ===");
+            s2.displayProfile();
 
-        System.out.println();
+            System.out.println();
 
-        // Save to files
-        rs.Add_Student(s1);
+            // Display loaded courses
+            System.out.println("=== COURSES ===");
 
-        rs.Add_Proff(p1);
+            for (Courses c : system.courses) {
 
-        System.out.println("Data saved successfully!");
+                System.out.println("Course Code: " + c.courseCode);
+                System.out.println("Title: " + c.title);
+                System.out.println("Credits: " + c.credits);
 
-        // Print courses
-        System.out.println();
+                System.out.println("-------------------");
+            }
 
-        System.out.println("===== STUDENT COURSES =====");
-
-        for (String course : s1.getCourse()) {
-            System.out.println(course);
         }
 
-        // Test toString()
-        System.out.println();
+        catch (Exception e) {
 
-        System.out.println("===== TOSTRING TEST =====");
+            System.out.println("Error: " + e.getMessage());
 
-        System.out.println(s1.toString());
-
-        System.out.println(p1.toString());
+        }
     }
 }
