@@ -1,10 +1,7 @@
-import java.util.LinkedList;
-import java.util.List;
 
 public class Student extends Person {
     private String major;
     private double gpa;
-    private List<String> course = new LinkedList<>();
 
     public Student(String name, String ID, String Email, String major, double gpa){
         super(name, ID, Email);
@@ -12,9 +9,6 @@ public class Student extends Person {
         this.gpa=gpa;
     }
 
-    public List<String> getCourse() {
-        return course;
-    }
     public double getGpa() {
         return gpa;
     }
@@ -27,9 +21,6 @@ public class Student extends Person {
     }
     public void setMajor(String major) {
         this.major = major;
-    }
-    public void setCourse(List<String> course) {
-        this.course = course;
     }
 
     public void displayProfile(){

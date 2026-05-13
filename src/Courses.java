@@ -4,14 +4,7 @@ public class Courses {
      String courseCode;
      String title;
      int credits;
-     static int seats=0;
-    static public void counter()
-    {
-        if (seats<=30)
-        {
-            seats++;
-        }
-    }
+     private int seats=0;
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
     }
@@ -23,9 +16,26 @@ public class Courses {
     }
 
     Courses(String courseCode, String title, int credits) {
-        counter();
         this.courseCode = courseCode;
         this.title = title;
         this.credits = credits;
     }
+
+    public boolean full(){
+        if(seats<30)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean add(){
+        if(!full()){
+            seats++;
+            return true;
+        }
+        else
+            return false;
+    }
+
+
 }
