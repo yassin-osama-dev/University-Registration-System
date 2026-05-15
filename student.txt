@@ -3,3 +3,9 @@
 2025002,Ahmed Ali,ahmed@gmail.com,Software Engineering,3.4
 2025001,Yassin Osama,yassin@gmail.com,Computer Science,3.7
 2025002,Ahmed Ali,ahmed@gmail.com,Software Engineering,3.4
+S1001,Yassin,yassin@gmail.com,CS,3.5
+S1001,Yassin,yassin@gmail.com,CS,3.5
+S1001,Yassin,yassin@gmail.com,CS,3.5
+S1001,Yassin,yassin@gmail.com,CS,3.5
+S1001,Yassin,yassin@gmail.com,CS,3.5
+S1001,Yassin,yassin@gmail.com,CS,3.5

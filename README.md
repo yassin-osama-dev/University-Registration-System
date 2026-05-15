@@ -1,123 +1,79 @@
-# University Registration System
+# University Registration System (OOP Project)
 
-A simple University Registration System built using Java and Object-Oriented Programming (OOP) concepts.
+## Overview
 
-## Features
+This project is a simple University Registration System implemented in Java. It demonstrates core Object-Oriented Programming (OOP) principles such as:
 
-- Add students
-- Add professors
-- Display profiles
-- Store data in text files
-- Manage student courses
-- Demonstrates core OOP principles
+* Inheritance
+* Aggregation
+* Encapsulation
+* Basic file handling (persistence)
 
----
+The system allows:
 
-# OOP Concepts Used
-
-## Inheritance
-- `Student` and `Professor` inherit from `Person`
-
-## Abstraction
-- `Person` is an abstract class
-- `displayProfile()` is an abstract method
-
-## Encapsulation
-- Private attributes with getters and setters
-
-## Polymorphism
-- Method overriding using:
-  - `displayProfile()`
-  - `toString()`
+* Adding students and professors
+* Loading courses from a file
+* Registering students into courses
+* Assigning courses to professors
+* Tracking enrollments
 
 ---
 
-# Classes
+## OOP Design
 
-## Person.java
-Abstract parent class containing:
-- ID
-- Name
-- Email
+### 1. Inheritance
 
-## Student.java
-Extends `Person` and contains:
-- Major
-- GPA
-- List of courses
+The system uses inheritance through the `Person` class:
 
-## Professor.java
-Extends `Person` and contains:
-- Department
+* `Student` extends `Person`
+* `Professor` extends `Person`
 
-## RegistrationSystem.java
-Handles:
-- Saving students to `student.txt`
-- Saving professors to `proff.txt`
+This allows shared attributes like:
 
-## Main.java
-Tests the entire system.
+* ID
+* Name
+* Email
 
 ---
 
-# Example Output
+### 2. Aggregation
 
-## Student Profile
+Aggregation is used in multiple places:
 
-```text
-Name: Yassin
-ID: 2025001
-Email: yassin@gmail.com
-Major: Computer Science
-gpa: 3.7
-```
+* `Student` → holds `ArrayList<Enrollment>`
+* `Professor` → holds `ArrayList<Courses>`
 
-## Professor Profile
-
-```text
-Name: Ahmed Ali
-ID: P100
-Email: ahmed@university.com
-Department: Computer Science
-```
+These objects can exist independently from their owners.
 
 ---
 
-# Saved Files
+### 3. Composition (Partial)
 
-## student.txt
+* `Enrollment` contains a `Courses` object
 
-```text
-2025001,Yassin,yassin@gmail.com,Computer Science,3.7
-```
-
-## proff.txt
-
-```text
-P100,Ahmed Ali,ahmed@university.com,ComputerScience
-```
+This represents a strong dependency relationship inside the enrollment structure.
 
 ---
 
-# Technologies Used
+## Key Features
 
-- Java
-- OOP
-- File Handling
-- Linked Lists
-
----
-
-# Future Improvements
-
-- Search functionality
-- Delete/Edit functionality
-- GUI
-- Database integration
-- Course registration system
+* Student course registration with credit limit check
+* Course capacity limit (30 students)
+* File-based storage for students and professors
+* Course loading from external text file
+* Professor course assignment
 
 ---
 
-# Author
+## Limitations
 
-Developed as a university OOP project.
+* No course drop functionality
+* No grade processing logic
+* Enrollment is not persisted to file
+* No bidirectional mapping between courses and students
+
+---
+
+## Conclusion
+
+This project demonstrates strong foundational OOP principles and is suitable for a university-level coursework assignment. It models a simplified academic registration system with persistent storage and object relationships.

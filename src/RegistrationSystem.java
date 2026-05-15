@@ -44,7 +44,7 @@ class RegistrationSystem {
 
     public void enrollStudent(Student student, Courses course) throws Exception {
     if (!course.add())
-        throw new Exception(course.title + " is full!");
+        throw new Exception(course.getTitle() + " is full!");
     }
 
 
