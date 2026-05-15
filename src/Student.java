@@ -40,9 +40,14 @@ public class Student extends Person {
                 return;
             }
         }
-        if (CalculateCredithours()+course.getCredits()>18)
+        int max_credit;
+        if(gpa<2.0)
+            max_credit=9;
+        else
+            max_credit=18;
+        if (CalculateCredithours()+course.getCredits()>max_credit)
         {
-            System.out.println("Cannot exceed 18 credits");
+            System.out.println("Cannot exceed " + max_credit + " credits");
             return;
         }
         if (!course.add())
@@ -83,4 +88,21 @@ public class Student extends Person {
         return super.toString()+","+getMajor()+","+getGpa();
     }
 
+    //drop course part
+    public void DropSubject(Courses course){
+        Enrollment found = null;
+        for (Enrollment e: enrollments){
+            if (e.getCourse().getCourseCode().equals(course.getCourseCode())){
+                found=e;
+                break;
+            }
+        }
+        if(found==null){
+            System.out.println("You are not enrolled");
+            return;
+        }
+        course.drop();
+        enrollments.remove(found);
+        credit_hours-=course.getCredits();
+    }
 }

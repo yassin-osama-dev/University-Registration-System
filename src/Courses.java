@@ -48,5 +48,9 @@ public class Courses {
             return false;
     }
 
+    public void drop(){
+        seats--;
+    }
+
 
 }
