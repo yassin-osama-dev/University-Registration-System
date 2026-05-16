@@ -33,11 +33,11 @@ public class Student extends Person {
         System.out.println("Major: "+ major);
         System.out.println("gpa: "+ gpa);
     }
-    public void registerCourse(Courses course,String semester){
+    public boolean registerCourse(Courses course,String semester){
         for (Enrollment e: enrollments){
             if (e.getCourse().getCourseCode().equals(course.getCourseCode())){
                 System.out.println("Already registered");
-                return;
+                return false;
             }
         }
         int max_credit;
@@ -48,21 +48,22 @@ public class Student extends Person {
         if (CalculateCredithours()+course.getCredits()>max_credit)
         {
             System.out.println("Cannot exceed " + max_credit + " credits");
-            return;
+            return false;
         }
         if (!verify(course)) {
             System.out.println("Prerequisites not met");
-          return;
+            return false;
         }
         if (!course.add())
         {
             System.out.println("No seats available");
-            return;
+            return false;
         }
         Enrollment enrollment  = new Enrollment(course,semester);
         enrollments.add(enrollment);
         registeredCourses.add(course);
         System.out.println("Course registered successfully");
+        return true;
     }
 
     public boolean verify(Courses course) {
@@ -109,7 +110,7 @@ public class Student extends Person {
     }
 
     //drop course part
-    public void DropSubject(Courses course){
+    public boolean DropSubject(Courses course){
         Enrollment found = null;
         for (Enrollment e: enrollments){
             if (e.getCourse().getCourseCode().equals(course.getCourseCode())){
@@ -119,12 +120,13 @@ public class Student extends Person {
         }
         if(found==null){
             System.out.println("You are not enrolled");
-            return;
+            return false;
         }
         course.drop();
         enrollments.remove(found);
         registeredCourses.remove(course);
         credit_hours-=course.getCredits();
+        return true;
     }
     public ArrayList<Courses> getRegisteredCourses() {
         return registeredCourses;

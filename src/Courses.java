@@ -54,7 +54,15 @@ public class Courses {
     }
 
     public void drop(){
-        seats--;
+        if (seats > 0) {
+            seats--;
+        }
+    }
+    public int getSeats() {
+        return seats;
+    }
+    public int getAvailableSeats() {
+        return 30 - seats;
     }
     public void addPrerequisite(String courseCode) {
         prerequisites.add(courseCode);
