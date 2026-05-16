@@ -5,7 +5,7 @@ public class Student extends Person {
     private String major;
     private double gpa;
     int credit_hours=0;
-
+    private ArrayList<Courses> registeredCourses = new ArrayList<>();
     public Student(String name, String ID, String Email, String major, double gpa){
         super(name, ID, Email);
         this.major=major;
@@ -104,5 +104,8 @@ public class Student extends Person {
         course.drop();
         enrollments.remove(found);
         credit_hours-=course.getCredits();
+    }
+    public ArrayList<Courses> getRegisteredCourses() {
+        return registeredCourses;
     }
 }
