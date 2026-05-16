@@ -14,11 +14,9 @@ public class Courses {
     public void setCredits(int credits) {
         this.credits = credits;
     }
-
     public int getCredits() {
         return credits;
     }
-
     public String getCourseCode(){
         return courseCode;
     }
@@ -47,6 +45,4 @@ public class Courses {
         else
             return false;
     }
-
-
 }

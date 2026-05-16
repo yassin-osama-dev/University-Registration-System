@@ -46,7 +46,4 @@ class RegistrationSystem {
     if (!course.add())
         throw new Exception(course.getTitle() + " is full!");
     }
-
-
-
 }

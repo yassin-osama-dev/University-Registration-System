@@ -4,9 +4,7 @@ public class Student extends Person {
     private ArrayList<Enrollment> enrollments= new ArrayList<>();
     private String major;
     private double gpa;
-    int credit_hours=0;
-
-    public Student(String name, String ID, String Email, String major, double gpa){
+    public Student(String name, String ID, String Email, String major, double gpa) {
         super(name, ID, Email);
         this.major=major;
         this.gpa=gpa;
