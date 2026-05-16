@@ -31,5 +31,12 @@ public class Professor extends Person {
             System.out.println("---------------------");
         }
     }
+    public ArrayList<Courses> getTeachingCourses() {
+        return teachingCourses;
+    }
 
+    @Override
+    public String toString() {
+        return super.toString() + "," + getDepartment();
+    }
 }

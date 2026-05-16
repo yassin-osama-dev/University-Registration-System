@@ -4,7 +4,9 @@ public class Student extends Person {
     private ArrayList<Enrollment> enrollments= new ArrayList<>();
     private String major;
     private double gpa;
-    public Student(String name, String ID, String Email, String major, double gpa) {
+    int credit_hours=0;
+    private ArrayList<Courses> registeredCourses = new ArrayList<>();
+    public Student(String name, String ID, String Email, String major, double gpa){
         super(name, ID, Email);
         this.major=major;
         this.gpa=gpa;
@@ -38,10 +40,19 @@ public class Student extends Person {
                 return;
             }
         }
-        if (CalculateCredithours()+course.getCredits()>18)
+        int max_credit;
+        if(gpa<2.0)
+            max_credit=9;
+        else
+            max_credit=18;
+        if (CalculateCredithours()+course.getCredits()>max_credit)
         {
-            System.out.println("Cannot exceed 18 credits");
+            System.out.println("Cannot exceed " + max_credit + " credits");
             return;
+        }
+        if (!verify(course)) {
+            System.out.println("Prerequisites not met");
+          return;
         }
         if (!course.add())
         {
@@ -50,8 +61,24 @@ public class Student extends Person {
         }
         Enrollment enrollment  = new Enrollment(course,semester);
         enrollments.add(enrollment);
+        registeredCourses.add(course);
         System.out.println("Course registered successfully");
     }
+
+    public boolean verify(Courses course) {
+        for (String pre : course.getPrerequisites()) {
+            boolean found = false;
+            for (Enrollment e : enrollments) {
+                if (e.getCourse().getCourseCode().equals(pre)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+        return true;
+    }
+
     public void viewCourse()
     {
         if (enrollments.isEmpty())
@@ -81,4 +108,25 @@ public class Student extends Person {
         return super.toString()+","+getMajor()+","+getGpa();
     }
 
+    //drop course part
+    public void DropSubject(Courses course){
+        Enrollment found = null;
+        for (Enrollment e: enrollments){
+            if (e.getCourse().getCourseCode().equals(course.getCourseCode())){
+                found=e;
+                break;
+            }
+        }
+        if(found==null){
+            System.out.println("You are not enrolled");
+            return;
+        }
+        course.drop();
+        enrollments.remove(found);
+        registeredCourses.remove(course);
+        credit_hours-=course.getCredits();
+    }
+    public ArrayList<Courses> getRegisteredCourses() {
+        return registeredCourses;
+    }
 }
