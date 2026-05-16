@@ -20,7 +20,6 @@ public class GUI extends JFrame {
                     "Could not load courses file");
         }
 
-        // Sample objects
         student = new Student(
                 "Yassin",
                 "S1001",
@@ -70,9 +69,6 @@ public class GUI extends JFrame {
 
         add(panel);
 
-        // =========================
-        // SHOW COURSES
-        // =========================
         showCoursesBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,9 +89,6 @@ public class GUI extends JFrame {
             }
         });
 
-        // =========================
-        // ADD STUDENT
-        // =========================
         addStudentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -117,9 +110,6 @@ public class GUI extends JFrame {
             }
         });
 
-        // =========================
-        // ADD PROFESSOR
-        // =========================
         addProfessorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,9 +131,6 @@ public class GUI extends JFrame {
             }
         });
 
-        // =========================
-        // REGISTER COURSES
-        // =========================
         registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -189,9 +176,6 @@ public class GUI extends JFrame {
             }
         });
 
-        // =========================
-        // STUDENT PROFILE
-        // =========================
         studentBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -240,9 +224,6 @@ public class GUI extends JFrame {
             }
         });
 
-        // =========================
-        // PROFESSOR COURSES
-        // =========================
         professorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
