@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
 public class Courses {
-     private String courseCode;
-     private String title;
-     private int credits;
-     private int seats=0;
+    private String courseCode;
+    private String title;
+    private int credits;
+    private int seats=0;
+    private ArrayList<String> prerequisites = new ArrayList<>();
+
     public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
     }
@@ -24,6 +26,9 @@ public class Courses {
     }
     public String getTitle(){
         return title;
+    }
+    public ArrayList<String> getPrerequisites() {
+        return prerequisites;
     }
 
     Courses(String courseCode, String title, int credits) {
@@ -51,6 +56,7 @@ public class Courses {
     public void drop(){
         seats--;
     }
-
-
+    public void addPrerequisite(String courseCode) {
+        prerequisites.add(courseCode);
+    }
 }

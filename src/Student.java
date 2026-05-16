@@ -50,6 +50,10 @@ public class Student extends Person {
             System.out.println("Cannot exceed " + max_credit + " credits");
             return;
         }
+        if (!verify(course)) {
+            System.out.println("Prerequisites not met");
+          return;
+        }
         if (!course.add())
         {
             System.out.println("No seats available");
@@ -59,6 +63,21 @@ public class Student extends Person {
         enrollments.add(enrollment);
         System.out.println("Course registered successfully");
     }
+
+    public boolean verify(Courses course) {
+        for (String pre : course.getPrerequisites()) {
+            boolean found = false;
+            for (Enrollment e : enrollments) {
+                if (e.getCourse().getCourseCode().equals(pre)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+        return true;
+    }
+
     public void viewCourse()
     {
         if (enrollments.isEmpty())

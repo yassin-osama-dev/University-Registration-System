@@ -10,7 +10,6 @@ class RegistrationSystem {
     java.io.File student_file = new java.io.File("student.txt");
     java.io.File proff_file = new java.io.File("proff.txt");
     java.io.File course_file = new java.io.File("Courses.txt");
-    Scanner scanner=new Scanner(course_file);
 
     RegistrationSystem() throws FileNotFoundException {
         Subject();
@@ -28,24 +27,31 @@ class RegistrationSystem {
         out.println(Proff_info);
         out.close();
     }
-    public void Subject() throws FileNotFoundException {
-        courses.clear();
-        Scanner scanner=new Scanner(course_file);
-        while(scanner.hasNext())
-        {
-            String line = scanner.nextLine();
-            String[] parts = line.split(",");
-            String course_code=parts[0];
-            String title=parts[1];
-            int credits=Integer.parseInt(parts[2]);
-            courses.add(new Courses(course_code,title,credits));
-        }
-    }
 
     public void enrollStudent(Student student, Courses course) throws Exception {
     if (!course.add())
         throw new Exception(course.getTitle() + " is full!");
     }
+
+    public void Subject() throws FileNotFoundException {
+    courses.clear();
+    Scanner scanner = new Scanner(course_file);
+    while (scanner.hasNext()) {
+        String line = scanner.nextLine();
+        String[] parts = line.split(",");
+        String course_code = parts[0];
+        String title = parts[1];
+        int credits = Integer.parseInt(parts[2]);
+        Courses course = new Courses(course_code, title, credits);
+
+        // read prerequisites if they exist
+        if (parts.length > 3 && !parts[3].isEmpty()) {
+            course.addPrerequisite(parts[3]);
+        }
+
+        courses.add(course);
+    }
+}
 
 
 
