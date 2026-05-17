@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RegisterCourseController">
+   <children>
+      <TextField fx:id="studentIdField" layoutX="247.0" layoutY="132.0" />
+      <TextField fx:id="courseCodeField" layoutX="247.0" layoutY="181.0" />
+      <Text layoutX="156.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID:" />
+      <Text layoutX="152.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Code" />
+      <Text layoutX="163.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Registration">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Button layoutX="263.0" layoutY="241.0" mnemonicParsing="false" onAction="#enrollStudentInCourse" text="Enroll" />
+      <Button layoutX="37.0" layoutY="348.0" mnemonicParsing="false" onAction="#backToStudentMenu" prefWidth="78.0" text="Back" />
+   </children>
+</AnchorPane>
