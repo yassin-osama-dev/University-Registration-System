@@ -14,7 +14,7 @@ public interface FxmlController {
 
     RegistrationSystem getRegistrationSystem();
 
-    default void switchScene(ActionEvent event, String fxmlFile) throws IOException {
+     default void switchScene(ActionEvent event, String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(findFxml(fxmlFile));
         Parent root = loader.load();
 
@@ -31,8 +31,8 @@ public interface FxmlController {
         newStage.show();
     }
 
-    private URL findFxml(String fxmlFile) throws IOException {
-        URL resource = getClass().getResource(fxmlFile);
+    private static URL findFxml(String fxmlFile) throws IOException {
+        URL resource = FxmlController.class.getResource(fxmlFile);
         if (resource != null) {
             return resource;
         }
