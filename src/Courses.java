@@ -7,16 +7,6 @@ public class Courses {
     private int seats=0;
     private ArrayList<String> prerequisites = new ArrayList<>();
 
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
     public int getCredits() {
         return credits;
     }
@@ -57,12 +47,6 @@ public class Courses {
         if (seats > 0) {
             seats--;
         }
-    }
-    public int getSeats() {
-        return seats;
-    }
-    public int getAvailableSeats() {
-        return 30 - seats;
     }
     public void addPrerequisite(String courseCode) {
         prerequisites.add(courseCode);

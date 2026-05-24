@@ -4,7 +4,6 @@ public class Student extends Person {
     private ArrayList<Enrollment> enrollments= new ArrayList<>();
     private String major;
     private double gpa;
-    int credit_hours=0;
     private ArrayList<Courses> registeredCourses = new ArrayList<>();
     public Student(String name, String ID, String Email, String major, double gpa){
         super(name, ID, Email);
@@ -19,21 +18,16 @@ public class Student extends Person {
         return major;
     }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
+    public String displayProfile(){
+        String profile = "Name: " + getName()
+                + "\nID: " + getID()
+                + "\nEmail: " + getEmail()
+                + "\nMajor: " + major
+                + "\nGPA: " + gpa;
+        System.out.println(profile);
+        return profile;
     }
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public void displayProfile(){
-        System.out.println("Name: "+ getName());
-        System.out.println("ID: "+ getID());
-        System.out.println("Email: "+ getEmail());
-        System.out.println("Major: "+ major);
-        System.out.println("gpa: "+ gpa);
-    }
-    public boolean registerCourse(Courses course,String semester){
+    public boolean registerCourse(Courses course){
         for (Enrollment e: enrollments){
             if (e.getCourse().getCourseCode().equals(course.getCourseCode())){
                 System.out.println("Already registered");
@@ -59,7 +53,7 @@ public class Student extends Person {
             System.out.println("No seats available");
             return false;
         }
-        Enrollment enrollment  = new Enrollment(course,semester);
+        Enrollment enrollment  = new Enrollment(course);
         enrollments.add(enrollment);
         registeredCourses.add(course);
         System.out.println("Course registered successfully");
@@ -80,22 +74,6 @@ public class Student extends Person {
         return true;
     }
 
-    public void viewCourse()
-    {
-        if (enrollments.isEmpty())
-            {
-            System.out.println("No enrollments available");
-            }
-        else {
-            for (Enrollment e: enrollments)
-            {
-                System.out.println("Course code: "+e.getCourse().getCourseCode());
-                System.out.println("Course title: "+e.getCourse().getTitle());
-                System.out.println("Course credits: "+e.getCourse().getCredits());
-                System.out.println("---------------------");
-            }
-        }
-    }
     public int CalculateCredithours()
     {
         int total=0;
@@ -109,7 +87,6 @@ public class Student extends Person {
         return super.toString()+","+getMajor()+","+getGpa();
     }
 
-    //drop course part
     public boolean DropSubject(Courses course){
         Enrollment found = null;
         for (Enrollment e: enrollments){
@@ -125,7 +102,6 @@ public class Student extends Person {
         course.drop();
         enrollments.remove(found);
         registeredCourses.remove(course);
-        credit_hours-=course.getCredits();
         return true;
     }
     public ArrayList<Courses> getRegisteredCourses() {

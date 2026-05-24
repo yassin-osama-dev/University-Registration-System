@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="560.0" prefWidth="980.0" style="-fx-background-color: #eef2f7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets bottom="14.0" left="26.0" right="26.0" top="14.0" />
+            </padding>
+            <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                <Label text="Drop Student" textFill="#111827">
+                    <font>
+                        <Font size="23.0" />
+                    </font>
+                </Label>
+                <Text fill="#6b7280" strokeType="OUTSIDE" strokeWidth="0.0" text="A professor can drop only students enrolled in one of their assigned courses" />
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#backToProfessorMenu" prefWidth="88.0" style="-fx-background-color: #f3f4f6; -fx-border-color: #cbd5e1; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #1f2937;" text="Back" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="16.0">
+            <padding>
+                <Insets bottom="24.0" left="26.0" right="26.0" top="24.0" />
+            </padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="18.0" style="-fx-background-color: #7f1d1d; -fx-background-radius: 9;">
+                <padding>
+                    <Insets bottom="18.0" left="22.0" right="22.0" top="18.0" />
+                </padding>
+                <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                    <Label text="Controlled Drop" textFill="white">
+                        <font>
+                            <Font size="21.0" />
+                        </font>
+                    </Label>
+                    <Text fill="#fee2e2" strokeType="OUTSIDE" strokeWidth="0.0" text="The system checks both sides: professor assignment and student enrollment." />
+                </VBox>
+                <Label style="-fx-background-color: #991b1b; -fx-background-radius: 6; -fx-padding: 7 12 7 12;" text="Permission Required" textFill="#fee2e2" />
+            </HBox>
+
+            <GridPane hgap="12.0" vgap="12.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-radius: 9; -fx-background-radius: 9;">
+                <padding>
+                    <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+                </padding>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER" minWidth="110.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="165.0" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="95.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="165.0" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="100.0" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="150.0" />
+                    <ColumnConstraints hgrow="NEVER" minWidth="125.0" />
+                </columnConstraints>
+
+                <Label text="Professor ID" textFill="#374151" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="professorIdField" promptText="P100" style="-fx-background-radius: 7; -fx-border-radius: 7; -fx-border-color: #cbd5e1;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Student ID" textFill="#374151" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <TextField fx:id="studentIdField" promptText="Student ID" style="-fx-background-radius: 7; -fx-border-radius: 7; -fx-border-color: #cbd5e1;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <Label text="Course" textFill="#374151" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <TextField fx:id="courseCodeField" promptText="CS101" style="-fx-background-radius: 7; -fx-border-radius: 7; -fx-border-color: #cbd5e1;" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+                <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#dropStudentByProfessor" prefHeight="36.0" style="-fx-background-color: #b91c1c; -fx-text-fill: white; -fx-background-radius: 7; -fx-font-size: 14px; -fx-font-weight: bold;" text="Drop" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+            </GridPane>
+
+            <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+                <items>
+                    <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7dce2; -fx-border-radius: 8;">
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                        <Label text="Professors and Assigned Courses" textFill="#111827">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <TableView fx:id="professorsTable" prefHeight="320.0" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="professorIdColumn" prefWidth="75.0" text="ID" />
+                                <TableColumn fx:id="professorNameColumn" prefWidth="120.0" text="Name" />
+                                <TableColumn fx:id="professorDepartmentColumn" prefWidth="120.0" text="Department" />
+                                <TableColumn fx:id="professorCoursesColumn" prefWidth="240.0" text="Assigned Courses" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                    <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7dce2; -fx-border-radius: 8;">
+                        <padding>
+                            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        </padding>
+                        <Label text="Students and Registered Courses" textFill="#111827">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Label>
+                        <TableView fx:id="studentsTable" prefHeight="320.0" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="studentIdColumn" prefWidth="105.0" text="ID" />
+                                <TableColumn fx:id="studentNameColumn" prefWidth="130.0" text="Name" />
+                                <TableColumn fx:id="studentMajorColumn" prefWidth="120.0" text="Major" />
+                                <TableColumn fx:id="studentCoursesColumn" prefWidth="250.0" text="Registered Courses" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </items>
+            </SplitPane>
+        </VBox>
+    </center>
+</BorderPane>

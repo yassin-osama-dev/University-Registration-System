@@ -5,32 +5,46 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f6f7f9;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+<BorderPane prefHeight="460.0" prefWidth="760.0" style="-fx-background-color: #eef2f7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
 
     <top>
         <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-width: 0 0 1 0;">
             <padding>
-                <Insets bottom="14.0" left="24.0" right="24.0" top="14.0" />
+                <Insets bottom="14.0" left="26.0" right="26.0" top="14.0" />
             </padding>
-            <Label text="Student Menu" textFill="#1f2937" HBox.hgrow="ALWAYS">
-                <font>
-                    <Font size="22.0" />
-                </font>
-            </Label>
-            <Button mnemonicParsing="false" onAction="#backToLogin" prefWidth="80.0" text="Back" />
+            <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                <Label text="Student Menu" textFill="#111827">
+                    <font>
+                        <Font size="23.0" />
+                    </font>
+                </Label>
+                <Text fill="#6b7280" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration tools and student records" />
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#backToLogin" prefWidth="88.0" style="-fx-background-color: #f3f4f6; -fx-border-color: #cbd5e1; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #1f2937;" text="Back" />
         </HBox>
     </top>
 
     <center>
-        <VBox spacing="16.0">
+        <VBox alignment="CENTER" spacing="20.0">
             <padding>
-                <Insets bottom="28.0" left="70.0" right="70.0" top="36.0" />
+                <Insets bottom="34.0" left="56.0" right="56.0" top="34.0" />
             </padding>
 
-            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#openRegisterCourse" prefHeight="42.0" text="Register Course" />
-            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#openAddNewStudent" prefHeight="42.0" text="Add New Student" />
-            <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#openShowCourses" prefHeight="42.0" text="Show Courses" />
-            <Button disable="true" maxWidth="Infinity" mnemonicParsing="false" prefHeight="42.0" text="Show Students" />
+            <GridPane hgap="16.0" maxWidth="620.0" vgap="16.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="104.0" vgrow="ALWAYS" />
+                    <RowConstraints minHeight="104.0" vgrow="ALWAYS" />
+                </rowConstraints>
+
+                <Button alignment="CENTER_LEFT" contentDisplay="TOP" maxWidth="Infinity" mnemonicParsing="false" onAction="#openRegisterCourse" prefHeight="104.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #111827; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 18;" text="Register Course" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Button alignment="CENTER_LEFT" contentDisplay="TOP" maxWidth="Infinity" mnemonicParsing="false" onAction="#openAddNewStudent" prefHeight="104.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #111827; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 18;" text="Add New Student" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Button alignment="CENTER_LEFT" contentDisplay="TOP" maxWidth="Infinity" mnemonicParsing="false" onAction="#openShowCourses" prefHeight="104.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #111827; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 18;" text="Show Courses" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Button alignment="CENTER_LEFT" contentDisplay="TOP" maxWidth="Infinity" mnemonicParsing="false" onAction="#openShowStudents" prefHeight="104.0" style="-fx-background-color: #0f766e; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 18;" text="Show Students" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </GridPane>
         </VBox>
     </center>
 </BorderPane>

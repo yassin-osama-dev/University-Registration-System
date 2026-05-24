@@ -33,7 +33,7 @@ class RegistrationSystem {
     }
 
     public void enrollStudent(Student student, Courses course) throws Exception {
-        if (!student.registerCourse(course, "Fall 2026")) {
+        if (!student.registerCourse(course)) {
             throw new Exception("Could not enroll " + student.getName() + " in " + course.getTitle());
         }
     }
@@ -44,8 +44,38 @@ class RegistrationSystem {
         }
     }
 
+    public void dropStudentByProfessor(Professor professor, Student student, Courses course) throws Exception {
+        if (!isProfessorAssignedToCourse(professor, course)) {
+            throw new Exception(professor.getName() + " is not assigned to " + course.getTitle());
+        }
+
+        if (!isStudentRegisteredInCourse(student, course)) {
+            throw new Exception(student.getName() + " is not registered in " + course.getTitle());
+        }
+
+        dropStudent(student, course);
+    }
+
     public void assignProfessorToCourse(Professor professor, Courses course) {
         professor.assignCourses(course);
+    }
+
+    public boolean isProfessorAssignedToCourse(Professor professor, Courses course) {
+        for (Courses teachingCourse : professor.getTeachingCourses()) {
+            if (teachingCourse.getCourseCode().equals(course.getCourseCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isStudentRegisteredInCourse(Student student, Courses course) {
+        for (Courses registeredCourse : student.getRegisteredCourses()) {
+            if (registeredCourse.getCourseCode().equals(course.getCourseCode())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Student findStudentById(String id) {

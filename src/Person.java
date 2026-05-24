@@ -19,17 +19,7 @@ public abstract class Person {
         return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setID(String iD) {
-        ID = iD;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public abstract void displayProfile();
+    public abstract String displayProfile();
 
     @Override
     public String toString() {

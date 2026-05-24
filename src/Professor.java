@@ -6,30 +6,37 @@ public class Professor extends Person {
     Professor(String name,String ID,String Email,String department)
     {
         super(name,ID,Email);
-        this.department=department;
+        setDepartment(department);
     }
 
     public String getDepartment() {
         return department;
     }
 
+    public void setDepartment(String department) {
+        if (department == null || department.trim().isEmpty()) {
+            this.department = "General";
+        } else {
+            this.department = department.trim();
+        }
+    }
+
     @Override
-    public void displayProfile() {
-        System.out.println("Name: " + getName());
-        System.out.println("ID: " + getID());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Department: " + getDepartment());
+    public String displayProfile() {
+        String profile = "Name: " + getName()
+                + "\nID: " + getID()
+                + "\nEmail: " + getEmail()
+                + "\nDepartment: " + getDepartment();
+        System.out.println(profile);
+        return profile;
     }
     public void assignCourses(Courses courses){
-        teachingCourses.add(courses);
-    }
-    public void viewTeachingCourses(){
-        for(Courses courses:teachingCourses){
-            System.out.println("Course code: "+courses.getCourseCode());
-            System.out.println("Title: "+courses.getTitle());
-            System.out.println("Credits: "+courses.getCredits());
-            System.out.println("---------------------");
+        for (Courses teachingCourse : teachingCourses) {
+            if (teachingCourse.getCourseCode().equals(courses.getCourseCode())) {
+                return;
+            }
         }
+        teachingCourses.add(courses);
     }
     public ArrayList<Courses> getTeachingCourses() {
         return teachingCourses;

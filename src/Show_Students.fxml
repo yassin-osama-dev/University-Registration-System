@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="470.0" prefWidth="860.0" style="-fx-background-color: #eef2f7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="12.0" style="-fx-background-color: white; -fx-border-color: #d7dce2; -fx-border-width: 0 0 1 0;">
+         <padding>
+            <Insets bottom="14.0" left="26.0" right="26.0" top="14.0" />
+         </padding>
+         <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+            <Label text="Students" textFill="#111827">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Text fill="#6b7280" strokeType="OUTSIDE" strokeWidth="0.0" text="Student directory with academic details" />
+         </VBox>
+         <Button mnemonicParsing="false" onAction="#backToStudentMenu" prefWidth="88.0" style="-fx-background-color: #f3f4f6; -fx-border-color: #cbd5e1; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #1f2937;" text="Back" />
+      </HBox>
+   </top>
+
+   <center>
+      <VBox spacing="14.0">
+         <padding>
+            <Insets bottom="24.0" left="26.0" right="26.0" top="24.0" />
+         </padding>
+
+         <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #0f766e; -fx-background-radius: 9;">
+            <padding>
+               <Insets bottom="16.0" left="20.0" right="20.0" top="16.0" />
+            </padding>
+            <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+               <Label text="Student Records" textFill="white">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+               </Label>
+               <Text fill="#ccfbf1" strokeType="OUTSIDE" strokeWidth="0.0" text="Double-click a row to open the student profile" />
+            </VBox>
+            <Label style="-fx-background-color: #115e59; -fx-background-radius: 6; -fx-padding: 7 12 7 12;" text="Profiles" textFill="#ecfeff" />
+         </HBox>
+
+         <TableView fx:id="studentsTable" prefHeight="310.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7dce2; -fx-border-radius: 8;">
+            <padding>
+               <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+            <columns>
+               <TableColumn fx:id="studentIdColumn" prefWidth="140.0" text="Registration Number" />
+               <TableColumn fx:id="studentNameColumn" prefWidth="145.0" text="Name" />
+               <TableColumn fx:id="studentEmailColumn" prefWidth="220.0" text="Email" />
+               <TableColumn fx:id="studentMajorColumn" prefWidth="130.0" text="Major" />
+               <TableColumn fx:id="studentGpaColumn" prefWidth="80.0" text="GPA" />
+               <TableColumn fx:id="studentCreditsColumn" prefWidth="90.0" text="Credits" />
+            </columns>
+         </TableView>
+      </VBox>
+   </center>
+</BorderPane>
