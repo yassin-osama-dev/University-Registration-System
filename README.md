@@ -1,79 +1,68 @@
-# University Registration System (OOP Project)
+# University Registration System
 
-## Overview
-
-This project is a simple University Registration System implemented in Java. It demonstrates core Object-Oriented Programming (OOP) principles such as:
-
-* Inheritance
-* Aggregation
-* Encapsulation
-* Basic file handling (persistence)
-
-The system allows:
-
-* Adding students and professors
-* Loading courses from a file
-* Registering students into courses
-* Assigning courses to professors
-* Tracking enrollments
+A Java-based university registration system built using Object-Oriented Programming principles and JavaFX. The system allows students and professors to manage courses, enrollments, and academic workflows through a graphical user interface.
 
 ---
 
-## OOP Design
+## Features
 
-### 1. Inheritance
+### Student Features
+- Student course registration
+- Course dropping functionality
+- Credit-hour limit validation
+- Prerequisite course validation
+- Seat-capacity management
+- View registered courses
+- Student profile management
 
-The system uses inheritance through the `Person` class:
+### Professor Features
+- Professor course assignment
+- View teaching courses
+- Professor profile management
 
-* `Student` extends `Person`
-* `Professor` extends `Person`
-
-This allows shared attributes like:
-
-* ID
-* Name
-* Email
-
----
-
-### 2. Aggregation
-
-Aggregation is used in multiple places:
-
-* `Student` → holds `ArrayList<Enrollment>`
-* `Professor` → holds `ArrayList<Courses>`
-
-These objects can exist independently from their owners.
+### System Features
+- Login system for students and professors
+- Persistent file-based storage
+- Dynamic course loading from text files
+- JavaFX graphical user interface
+- Scene switching and controller-based frontend handling
 
 ---
 
-### 3. Composition (Partial)
+## Object-Oriented Programming Concepts Used
 
-* `Enrollment` contains a `Courses` object
+The project was designed using core OOP principles:
 
-This represents a strong dependency relationship inside the enrollment structure.
-
----
-
-## Key Features
-
-* Student course registration with credit limit check
-* Course capacity limit (30 students)
-* File-based storage for students and professors
-* Course loading from external text file
-* Professor course assignment
+| Concept | Implementation |
+|---|---|
+| Inheritance | `Student` and `Professor` inherit from `Person` |
+| Abstraction | `Person` implemented as an abstract class |
+| Composition | `Student` contains `Enrollment` objects |
+| Aggregation | `Professor` is associated with independent `Courses` objects |
+| Encapsulation | Private fields with getters/setters |
 
 ---
 
-## Limitations
+## Project Structure
 
-* No course drop functionality
-* No grade processing logic
-* Enrollment is not persisted to file
-* No bidirectional mapping between courses and students
-
----
-
-## Conclusion
-
-This project demonstrates strong foundational OOP principles and is suitable for a university-level coursework assignment. It models a simplified academic registration system with persistent storage and object relationships.
+```text
+UniversityRegistrationSystem/
+│
+├── Main.java
+├── RegistrationSystem.java
+├── Person.java
+├── Student.java
+├── Professor.java
+├── Courses.java
+├── Enrollment.java
+│
+├── GUI/
+│   ├── Login.fxml
+│   ├── Student.fxml
+│   ├── Professor.fxml
+│   └── Controllers...
+│
+├── student.txt
+├── proff.txt
+├── Courses.txt
+└── ...
