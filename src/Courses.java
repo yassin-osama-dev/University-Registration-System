@@ -11,6 +11,18 @@ public class Courses {
         return credits;
     }
 
+    public int getSeats() {
+        return seats;
+    }
+
+    public int getSeatsLeft() {
+        return 30 - seats;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
     public String getCourseCode(){
         return courseCode;
     }

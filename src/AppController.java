@@ -247,6 +247,9 @@ public class AppController implements FxmlController {
                     student.getName() + " has been enrolled in " + course.getTitle() + ".");
             studentIdField.clear();
             courseCodeField.clear();
+            if (coursesTable != null) {
+                showCourses();
+            }
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Enrollment failed", e.getMessage());
         }
@@ -403,7 +406,7 @@ public class AppController implements FxmlController {
         registeredColumn.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(calculateRegisteredStudents(cellData.getValue())).asObject());
         seatsColumn.setCellValueFactory(cellData ->
-                new SimpleIntegerProperty(calculateSeatsLeft(cellData.getValue())).asObject());
+                new SimpleIntegerProperty(cellData.getValue().getSeatsLeft()).asObject());
     }
 
     private void setupStudentsTable() {

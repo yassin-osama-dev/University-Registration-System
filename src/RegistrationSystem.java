@@ -36,12 +36,14 @@ class RegistrationSystem {
         if (!student.registerCourse(course)) {
             throw new Exception("Could not enroll " + student.getName() + " in " + course.getTitle());
         }
+        saveCourses();
     }
 
     public void dropStudent(Student student, Courses course) throws Exception {
         if (!student.DropSubject(course)) {
             throw new Exception("Could not drop " + student.getName() + " from " + course.getTitle());
         }
+        saveCourses();
     }
 
     public void dropStudentByProfessor(Professor professor, Student student, Courses course) throws Exception {
@@ -123,10 +125,12 @@ class RegistrationSystem {
             String course_code = parts[0];
             String title = parts[1];
             int credits = Integer.parseInt(parts[2]);
+            int seats = Integer.parseInt(parts[3]);
             Courses course = new Courses(course_code, title, credits);
+            course.setSeats(seats);
 
             // read one or more prerequisites if they exist
-            for (int i = 3; i < parts.length; i++) {
+            for (int i = 4; i < parts.length; i++) {
                 if (!parts[i].isEmpty()) {
                     course.addPrerequisite(parts[i]);
                 }
@@ -183,6 +187,22 @@ class RegistrationSystem {
         scanner.close();
     }
 
-
-
+    public void saveCourses() throws IOException {
+        PrintWriter out = new PrintWriter(new FileWriter(course_file, false));
+        for (Courses course : courses) {
+            StringBuilder line = new StringBuilder();
+            line.append(course.getCourseCode()).append(",");
+            line.append(course.getTitle()).append(",");
+            line.append(course.getCredits()).append(",");
+            line.append(course.getSeats());
+            
+            ArrayList<String> prerequisites = course.getPrerequisites();
+            for (String prerequisite : prerequisites) {
+                line.append(",").append(prerequisite);
+            }
+            
+            out.println(line.toString());
+        }
+        out.close();
+    }
 }
