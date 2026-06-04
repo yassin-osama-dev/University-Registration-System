@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 
 public class Student extends Person {
-    private ArrayList<Enrollment> enrollments= new ArrayList<>();
+    private ArrayList<Enrollment> enrollments = new ArrayList<>();
     private String major;
     private double gpa;
-    private ArrayList<Courses> registeredCourses = new ArrayList<>();
     public Student(String name, String ID, String Email, String major, double gpa){
         super(name, ID, Email);
         this.major=major;
@@ -53,11 +52,19 @@ public class Student extends Person {
             System.out.println("No seats available");
             return false;
         }
-        Enrollment enrollment  = new Enrollment(course);
+        Enrollment enrollment = new Enrollment(course);
         enrollments.add(enrollment);
-        registeredCourses.add(course);
         System.out.println("Course registered successfully");
         return true;
+    }
+
+    public void addEnrollment(Courses course) {
+        for (Enrollment e : enrollments) {
+            if (e.getCourse().getCourseCode().equals(course.getCourseCode())) {
+                return;
+            }
+        }
+        enrollments.add(new Enrollment(course));
     }
 
     public boolean verify(Courses course) {
@@ -84,7 +91,13 @@ public class Student extends Person {
     }
     @Override
     public String toString() {
-        return super.toString()+","+getMajor()+","+getGpa();
+        StringBuilder result = new StringBuilder(super.toString())
+                .append(",").append(getMajor())
+                .append(",").append(getGpa());
+        for (Courses course : getRegisteredCourses()) {
+            result.append(",").append(course.getCourseCode());
+        }
+        return result.toString();
     }
 
     public boolean DropSubject(Courses course){
@@ -95,16 +108,19 @@ public class Student extends Person {
                 break;
             }
         }
-        if(found==null){
+        if (found == null) {
             System.out.println("You are not enrolled");
             return false;
         }
         course.drop();
         enrollments.remove(found);
-        registeredCourses.remove(course);
         return true;
     }
     public ArrayList<Courses> getRegisteredCourses() {
+        ArrayList<Courses> registeredCourses = new ArrayList<>();
+        for (Enrollment e : enrollments) {
+            registeredCourses.add(e.getCourse());
+        }
         return registeredCourses;
     }
 }

@@ -24,11 +24,8 @@ public interface FxmlController {
         }
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
-
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(root));
-        newStage.show();
+        currentStage.setScene(new Scene(root));
+        currentStage.show();
     }
 
     private static URL findFxml(String fxmlFile) throws IOException {

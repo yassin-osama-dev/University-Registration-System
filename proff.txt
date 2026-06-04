@@ -1,12 +1,3 @@
-P100,Ahmed Ali,ahmed@university.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-P2001,Dr Ahmed,ahmed@uni.com
-123,me,@gmail.yes,weewee
+P25,Aya,aya@gmail.com,Computer Science
+P26,Kareem,Kareem@gmail.com,Architecture
+P27,Fawzy,fawzy@gmail.com,Computer Engineering

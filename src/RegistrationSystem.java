@@ -13,17 +13,36 @@ class RegistrationSystem {
     java.io.File proff_file = new java.io.File("proff.txt");
     java.io.File course_file = new java.io.File("Courses.txt");
 
-    RegistrationSystem() throws FileNotFoundException {
+    RegistrationSystem() throws IOException {
+        ensureDataFiles();
         loadData();
     }
 
-    public void Add_Student(Student student) throws IOException {
-        PrintWriter out = new PrintWriter(new FileWriter(student_file, true));
-        String student_info = student.toString();
-        out.println(student_info);
-        out.close();
-        students.add(student);
+    private void ensureDataFiles() throws IOException {
+        if (!student_file.exists()) {
+            student_file.createNewFile();
+        }
+        if (!proff_file.exists()) {
+            proff_file.createNewFile();
+        }
+        if (!course_file.exists()) {
+            course_file.createNewFile();
+        }
     }
+
+    public void Add_Student(Student student) throws IOException {
+        students.add(student);
+        saveStudents();
+    }
+
+    public void saveStudents() throws IOException {
+        PrintWriter out = new PrintWriter(new FileWriter(student_file, false));
+        for (Student student : students) {
+            out.println(student.toString());
+        }
+        out.close();
+    }
+
     public void Add_Proff(Professor proffessor) throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter(proff_file, true));
         String Proff_info = proffessor.toString();
@@ -37,6 +56,7 @@ class RegistrationSystem {
             throw new Exception("Could not enroll " + student.getName() + " in " + course.getTitle());
         }
         saveCourses();
+        saveStudents();
     }
 
     public void dropStudent(Student student, Courses course) throws Exception {
@@ -44,6 +64,7 @@ class RegistrationSystem {
             throw new Exception("Could not drop " + student.getName() + " from " + course.getTitle());
         }
         saveCourses();
+        saveStudents();
     }
 
     public void dropStudentByProfessor(Professor professor, Student student, Courses course) throws Exception {
@@ -107,13 +128,13 @@ class RegistrationSystem {
         return null;
     }
 
-    public void loadData() throws FileNotFoundException {
-        Subject();
+    public void loadData() throws IOException {
+        loadCourses();
         loadStudents();
         loadProfessors();
     }
 
-    public void Subject() throws FileNotFoundException {
+    public void loadCourses() throws IOException {
         courses.clear();
         Scanner scanner = new Scanner(course_file);
         while (scanner.hasNext()) {
@@ -122,10 +143,19 @@ class RegistrationSystem {
                 continue;
             }
             String[] parts = line.split(",", -1);
+            if (parts.length < 4) {
+                continue;
+            }
             String course_code = parts[0];
             String title = parts[1];
-            int credits = Integer.parseInt(parts[2]);
-            int seats = Integer.parseInt(parts[3]);
+            int credits;
+            int seats;
+            try {
+                credits = Integer.parseInt(parts[2]);
+                seats = Integer.parseInt(parts[3]);
+            } catch (NumberFormatException e) {
+                continue;
+            }
             Courses course = new Courses(course_code, title, credits);
             course.setSeats(seats);
 
@@ -158,7 +188,17 @@ class RegistrationSystem {
             String email = parts[2];
             String major = parts[3];
             double gpa = Double.parseDouble(parts[4]);
-            students.add(new Student(name, id, email, major, gpa));
+            Student student = new Student(name, id, email, major, gpa);
+            for (int i = 5; i < parts.length; i++) {
+                String courseCode = parts[i].trim();
+                if (!courseCode.isEmpty()) {
+                    Courses course = findCourseByCode(courseCode);
+                    if (course != null) {
+                        student.addEnrollment(course);
+                    }
+                }
+            }
+            students.add(student);
         }
         scanner.close();
     }

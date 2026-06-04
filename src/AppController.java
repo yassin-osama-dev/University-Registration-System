@@ -2,15 +2,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseButton;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class AppController implements FxmlController {
@@ -107,7 +104,7 @@ public class AppController implements FxmlController {
     private RegistrationSystem registrationSystem;
 
     @FXML
-    private void initialize() throws FileNotFoundException {
+    private void initialize() throws IOException {
         if (registrationSystem == null) {
             registrationSystem = new RegistrationSystem();
         }
@@ -249,6 +246,9 @@ public class AppController implements FxmlController {
             courseCodeField.clear();
             if (coursesTable != null) {
                 showCourses();
+            }
+            if (studentsTable != null) {
+                showStudents();
             }
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Enrollment failed", e.getMessage());
@@ -406,7 +406,7 @@ public class AppController implements FxmlController {
         registeredColumn.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(calculateRegisteredStudents(cellData.getValue())).asObject());
         seatsColumn.setCellValueFactory(cellData ->
-                new SimpleIntegerProperty(cellData.getValue().getSeatsLeft()).asObject());
+                new SimpleIntegerProperty(calculateSeatsLeft(cellData.getValue())).asObject());
     }
 
     private void setupStudentsTable() {
@@ -437,10 +437,6 @@ public class AppController implements FxmlController {
 
     }
 
-    private void displayStudentProfile(Student student) {
-        showAlert(Alert.AlertType.INFORMATION, "Student Profile", student.displayProfile());
-    }
-
     private void setupProfessorsTable() {
         if (professorIdColumn != null) {
             professorIdColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -460,10 +456,6 @@ public class AppController implements FxmlController {
         }
 
 
-    }
-
-    private void displayProfessorProfile(Professor professor) {
-        showAlert(Alert.AlertType.INFORMATION, "Professor Profile", professor.displayProfile());
     }
 
     private String formatTeachingCourses(Professor professor) {
