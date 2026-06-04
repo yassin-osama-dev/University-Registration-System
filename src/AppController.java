@@ -317,13 +317,17 @@ public class AppController implements FxmlController {
             }
         }
 
-        registrationSystem.assignProfessorToCourse(professor, course);
-        showAlert(Alert.AlertType.INFORMATION, "Assignment complete",
-                professor.getName() + " has been assigned to " + course.getTitle() + ".");
-        professorIdField.clear();
-        professorCourseCodeField.clear();
-        if (professorsTable != null) {
-            showProfessors();
+        try {
+            registrationSystem.assignProfessorToCourse(professor, course);
+            showAlert(Alert.AlertType.INFORMATION, "Assignment complete",
+                    professor.getName() + " has been assigned to " + course.getTitle() + ".");
+            professorIdField.clear();
+            professorCourseCodeField.clear();
+            if (professorsTable != null) {
+                showProfessors();
+            }
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Save failed", "Could not save professor assignment: " + e.getMessage());
         }
     }
 

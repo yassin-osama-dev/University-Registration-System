@@ -43,12 +43,17 @@ class RegistrationSystem {
         out.close();
     }
 
-    public void Add_Proff(Professor proffessor) throws IOException {
-        PrintWriter out = new PrintWriter(new FileWriter(proff_file, true));
-        String Proff_info = proffessor.toString();
-        out.println(Proff_info);
+    public void saveProfessors() throws IOException {
+        PrintWriter out = new PrintWriter(new FileWriter(proff_file, false));
+        for (Professor professor : professors) {
+            out.println(professor.toString());
+        }
         out.close();
+    }
+
+    public void Add_Proff(Professor proffessor) throws IOException {
         professors.add(proffessor);
+        saveProfessors();
     }
 
     public void enrollStudent(Student student, Courses course) throws Exception {
@@ -79,8 +84,9 @@ class RegistrationSystem {
         dropStudent(student, course);
     }
 
-    public void assignProfessorToCourse(Professor professor, Courses course) {
+    public void assignProfessorToCourse(Professor professor, Courses course) throws IOException {
         professor.assignCourses(course);
+        saveProfessors();
     }
 
     public boolean isProfessorAssignedToCourse(Professor professor, Courses course) {
@@ -222,7 +228,17 @@ class RegistrationSystem {
             if (parts.length > 3) {
                 department = parts[3];
             }
-            professors.add(new Professor(name, id, email, department));
+            Professor professor = new Professor(name, id, email, department);
+            for (int i = 4; i < parts.length; i++) {
+                String courseCode = parts[i].trim();
+                if (!courseCode.isEmpty()) {
+                    Courses course = findCourseByCode(courseCode);
+                    if (course != null) {
+                        professor.assignCourses(course);
+                    }
+                }
+            }
+            professors.add(professor);
         }
         scanner.close();
     }

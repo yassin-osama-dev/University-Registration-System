@@ -44,6 +44,11 @@ public class Professor extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + "," + getDepartment();
+        StringBuilder result = new StringBuilder(super.toString())
+                .append(",").append(getDepartment());
+        for (Courses course : getTeachingCourses()) {
+            result.append(",").append(course.getCourseCode());
+        }
+        return result.toString();
     }
 }
